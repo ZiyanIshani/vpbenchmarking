@@ -1,48 +1,131 @@
-# Voltage Park Benchmark — NCCL Tests
+# Voltage Park Benchmark — Multi-Node NCCL Tests
 
 ## Goal
-Run NCCL collective communication benchmarks across all available GPUs on this node.
-Measure bandwidth (GB/s) and latency (µs) for AllReduce, AllGather, and Broadcast.
+Run cross-node NCCL collective benchmarks across 4 nodes x 8 H100 GPUs = 32 GPUs total.
+Measure bandwidth (GB/s) and latency (µs) for AllReduce, AllGather, and Broadcast over
+3.2 Tbps InfiniBand.
+
+## Cluster
+| Node | Internal IP   |
+|------|--------------|
+| g138 | 10.15.21.81  |
+| n2   | 10.15.25.105 |
+| n3   | 10.15.28.33  |
+| n4   | 10.15.22.49  |
+
+Primary node (run all commands from here): 10.15.21.81
+SSH access to all other nodes is passwordless as ubuntu@<ip>.
 
 ## Project Structure
-All work lives in ~/vp-benchmarks/ which is a git repo.
+~/vp-benchmarks/
+├── CLAUDE.md
+├── hostfile
+├── results/
+│   └── nccl_multinode/
+│       ├── nccl_allreduce_<timestamp>.txt
+│       ├── nccl_allgather_<timestamp>.txt
+│       ├── nccl_broadcast_<timestamp>.txt
+│       └── nccl_multinode_summary.md
+└── scripts/
+    └── nccl/
+        └── nccl-tests/               ← already built on primary node
 
-## Environment Detection
-Run these first and adapt all subsequent commands to what you find:
-    nvidia-smi
-    nvcc --version
-    which mpirun
-    ls /usr/lib/x86_64-linux-gnu/libnccl* 2>/dev/null || ls /usr/local/cuda/lib64/libnccl* 2>/dev/null
+## Step 1: Create hostfile
+```bash
+cat > ~/vp-benchmarks/hostfile << 'HOSTEOF'
+10.15.21.81 slots=8
+10.15.25.105 slots=8
+10.15.28.33 slots=8
+10.15.22.49 slots=8
+HOSTEOF
+```
 
-## Steps
+## Step 2: Install nccl-tests on all other nodes
+SSH into each of the 3 remote nodes and run the following.
+nccl-tests is already built on 10.15.21.81 — replicate to others:
+```bash
+for NODE in 10.15.25.105 10.15.28.33 10.15.22.49; do
+  echo "Setting up $NODE..."
+  ssh ubuntu@$NODE "mkdir -p ~/vp-benchmarks/scripts/nccl"
+  scp -r ~/vp-benchmarks/scripts/nccl/nccl-tests ubuntu@$NODE:~/vp-benchmarks/scripts/nccl/
+  # Verify GPU visibility on each node
+  ssh ubuntu@$NODE "nvidia-smi --query-gpu=name --format=csv,noheader | wc -l"
+done
+```
 
-### 1. Install dependencies (if missing)
-    sudo apt-get install -y build-essential git openmpi-bin libopenmpi-dev
-    sudo apt-get install -y libnccl2 libnccl-dev
-
-### 2. Clone and build nccl-tests
-    git clone https://github.com/NVIDIA/nccl-tests.git scripts/nccl/nccl-tests
-    cd scripts/nccl/nccl-tests
+If scp fails or binaries are incompatible, build from source on each node instead:
+```bash
+for NODE in 10.15.25.105 10.15.28.33 10.15.22.49; do
+  ssh ubuntu@$NODE "
+    sudo apt-get install -y build-essential openmpi-bin libopenmpi-dev libnccl2 libnccl-dev &&
+    mkdir -p ~/vp-benchmarks/scripts/nccl &&
+    cd ~/vp-benchmarks/scripts/nccl &&
+    git clone https://github.com/NVIDIA/nccl-tests.git &&
+    cd nccl-tests &&
     make MPI=1 MPI_HOME=/usr/lib/x86_64-linux-gnu/openmpi CUDA_HOME=/usr/local/cuda NCCL_HOME=/usr/lib/x86_64-linux-gnu
-If build fails, locate correct paths with find /usr -name "libnccl*" and find /usr -name "mpi.h", then retry.
+  "
+done
+```
 
-### 3. Run benchmarks
-    cd ~/vp-benchmarks
-    N_GPUS=$(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l)
-    TS=$(date +%Y%m%d_%H%M%S)
-    mpirun -np $N_GPUS scripts/nccl/nccl-tests/build/all_reduce_perf -b 8 -e 8G -f 2 -g 1 2>&1 | tee results/nccl/nccl_allreduce_${TS}.txt
-    mpirun -np $N_GPUS scripts/nccl/nccl-tests/build/all_gather_perf -b 8 -e 8G -f 2 -g 1 2>&1 | tee results/nccl/nccl_allgather_${TS}.txt
-    mpirun -np $N_GPUS scripts/nccl/nccl-tests/build/broadcast_perf -b 8 -e 8G -f 2 -g 1 2>&1 | tee results/nccl/nccl_broadcast_${TS}.txt
+## Step 3: Verify cluster connectivity
+```bash
+# Verify all 32 GPUs visible across nodes
+for NODE in 10.15.21.81 10.15.25.105 10.15.28.33 10.15.22.49; do
+  echo -n "$NODE GPUs: "
+  ssh ubuntu@$NODE "nvidia-smi --query-gpu=name --format=csv,noheader | wc -l"
+done
 
-### 4. Write summary
-Parse peak bandwidth and minimum latency from each output file and write to results/nccl/nccl_summary.md with this format:
+# Test MPI across all nodes
+mpirun -np 4 --hostfile ~/vp-benchmarks/hostfile \
+  -x NCCL_DEBUG=WARN \
+  hostname
+```
 
-# NCCL Benchmark Results
+If MPI fails, try adding: `--mca btl_tcp_if_include enp157s0f0np0`
+(this is the active network interface on the primary node)
+
+## Step 4: Run benchmarks
+```bash
+mkdir -p ~/vp-benchmarks/results/nccl_multinode
+cd ~/vp-benchmarks
+TS=$(date +%Y%m%d_%H%M%S)
+
+MPIFLAGS="-np 32 \
+  --hostfile hostfile \
+  --map-by ppr:8:node \
+  -x NCCL_DEBUG=WARN \
+  -x NCCL_SOCKET_IFNAME=enp157s0f0np0 \
+  -x NCCL_IB_DISABLE=0 \
+  -x LD_LIBRARY_PATH \
+  --mca btl_tcp_if_include enp157s0f0np0"
+
+# AllReduce
+mpirun $MPIFLAGS \
+  scripts/nccl/nccl-tests/build/all_reduce_perf \
+  -b 8 -e 8G -f 2 -g 1 2>&1 | tee results/nccl_multinode/nccl_allreduce_${TS}.txt
+
+# AllGather
+mpirun $MPIFLAGS \
+  scripts/nccl/nccl-tests/build/all_gather_perf \
+  -b 8 -e 8G -f 2 -g 1 2>&1 | tee results/nccl_multinode/nccl_allgather_${TS}.txt
+
+# Broadcast
+mpirun $MPIFLAGS \
+  scripts/nccl/nccl-tests/build/broadcast_perf \
+  -b 8 -e 8G -f 2 -g 1 2>&1 | tee results/nccl_multinode/nccl_broadcast_${TS}.txt
+```
+
+## Step 5: Write summary
+Parse peak bandwidth and minimum latency from each result file and write to
+~/vp-benchmarks/results/nccl_multinode/nccl_multinode_summary.md:
+
+# NCCL Multi-Node Benchmark Results
 Date: <timestamp>
-Node: <hostname>
-GPUs: <count> x <model>
-CUDA: <version>
-NCCL: <version>
+Nodes: 4 x g138-cluster (10.15.21.81, 10.15.25.105, 10.15.28.33, 10.15.22.49)
+GPUs: 32 x NVIDIA H100 80GB HBM3 (8 per node)
+Interconnect: 3.2 Tbps InfiniBand
+CUDA: 12.6
+NCCL: 2.24.3
 
 | Test      | Message Size | Algo BW (GB/s) | Bus BW (GB/s) | Latency (µs) |
 |-----------|-------------|----------------|---------------|-------------|
@@ -50,16 +133,28 @@ NCCL: <version>
 | AllGather | ...         | ...            | ...           | ...         |
 | Broadcast | ...         | ...            | ...           | ...         |
 
-### 5. Commit results
-    git add results/nccl/nccl_summary.md
-    git commit -m "results: NCCL benchmarks $(date +%Y%m%d_%H%M%S)"
+### Comparison vs Single-Node
+| Test      | Single-Node Bus BW | Multi-Node Bus BW | Efficiency % |
+|-----------|--------------------|-------------------|-------------|
+| AllReduce | 479.72 GB/s        | ...               | ...         |
+| AllGather | 183.09 GB/s        | ...               | ...         |
+| Broadcast | 212.86 GB/s        | ...               | ...         |
+
+## Step 6: Commit results
+```bash
+cd ~/vp-benchmarks
+git add results/nccl_multinode/nccl_multinode_summary.md hostfile
+git commit -m "results: multi-node NCCL benchmarks $(date +%Y%m%d_%H%M%S)"
+git push origin master
+```
 
 ## Error Handling
-- If mpirun fails with permission denied: add --allow-run-as-root
-- If NCCL throws ncclSystemError: run nvidia-smi -L to verify all GPUs visible
-- If build fails with missing headers: adjust MPI_HOME and NCCL_HOME paths
-- Fix errors before moving to the next test
+- If MPI can't find hosts: check hostfile formatting, verify SSH works manually
+- If NCCL falls back to TCP: set NCCL_IB_DISABLE=0 and verify ibstat shows active IB ports
+- If bandwidth is unexpectedly low (<50 GB/s): run ibstat to check IB link speed
+- If a node is unreachable mid-run: verify with ping, do not proceed until all 4 nodes respond
+- Fix all errors before running the next collective
 
 ## Done
-When nccl_summary.md is written and committed, stop and report the results.
-Do not start any other benchmarks.
+When nccl_multinode_summary.md is written and committed, stop and report results.
+Do not run any other benchmarks.
