@@ -1,1 +1,12 @@
-*.txt
+# Python
+__pycache__/
+*.pyc
+
+# Build artifacts
+*.o
+*.a
+*.so
+
+# Containers
+*.sif
+*.img

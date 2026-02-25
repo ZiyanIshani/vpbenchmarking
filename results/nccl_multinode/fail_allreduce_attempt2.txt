@@ -1,0 +1,35 @@
+Warning: Permanently added '10.15.25.105' (ED25519) to the list of known hosts.
+Warning: Permanently added '10.15.28.33' (ED25519) to the list of known hosts.
+Warning: Permanently added '10.15.22.49' (ED25519) to the list of known hosts.
+--------------------------------------------------------------------------
+WARNING: An invalid value was given for btl_tcp_if_include.  This
+value will be ignored.
+
+  Local host: g244
+  Value:      enp157s0f0np0
+  Message:    Unknown interface name
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+At least one pair of MPI processes are unable to reach each other for
+MPI communications.  This means that no Open MPI device has indicated
+that it can be used to communicate between these processes.  This is
+an error; Open MPI requires that all MPI processes be able to reach
+each other.  This error can sometimes be the result of forgetting to
+specify the "self" BTL.
+
+  Process 1 ([[22909,1],21]) is on host: g244
+  Process 2 ([[22909,1],29]) is on host: 10.15.22.49
+  BTLs attempted: self vader
+
+Your MPI job is now going to abort; sorry.
+--------------------------------------------------------------------------
+[g244:106204] *** An error occurred in MPI_Allgather
+[g244:106204] *** reported by process [1501364225,21]
+[g244:106204] *** on communicator MPI_COMM_WORLD
+[g244:106204] *** MPI_ERR_INTERN: internal error
+[g244:106204] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+[g244:106204] ***    and potentially your MPI job)
+[g138:154350] 15 more processes have sent help message help-mpi-btl-tcp.txt / invalid if_inexclude
+[g138:154350] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+[g138:154350] 15 more processes have sent help message help-mca-bml-r2.txt / unreachable proc
+[g138:154350] 15 more processes have sent help message help-mpi-errors.txt / mpi_errors_are_fatal

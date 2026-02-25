@@ -1,0 +1,220 @@
+Warning: Permanently added '10.15.25.105' (ED25519) to the list of known hosts.
+Warning: Permanently added '10.15.28.33' (ED25519) to the list of known hosts.
+Warning: Permanently added '10.15.22.49' (ED25519) to the list of known hosts.
+# nccl-tests version 2.17.9 nccl-headers=22403 nccl-library=22403
+# Collective test starting: all_reduce_perf
+# nThread 1 nGpus 1 minBytes 8 maxBytes 8589934592 step: 2(factor) warmup iters: 1 iters: 20 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 155183 on       g138 device  0 [0000:19:00] NVIDIA H100 80GB HBM3
+#  Rank  1 Group  0 Pid 155184 on       g138 device  1 [0000:3b:00] NVIDIA H100 80GB HBM3
+#  Rank  2 Group  0 Pid 155185 on       g138 device  2 [0000:4c:00] NVIDIA H100 80GB HBM3
+#  Rank  3 Group  0 Pid 155186 on       g138 device  3 [0000:5d:00] NVIDIA H100 80GB HBM3
+#  Rank  4 Group  0 Pid 155187 on       g138 device  4 [0000:9b:00] NVIDIA H100 80GB HBM3
+#  Rank  5 Group  0 Pid 155188 on       g138 device  5 [0000:bb:00] NVIDIA H100 80GB HBM3
+#  Rank  6 Group  0 Pid 155189 on       g138 device  6 [0000:cb:00] NVIDIA H100 80GB HBM3
+#  Rank  7 Group  0 Pid 155190 on       g138 device  7 [0000:db:00] NVIDIA H100 80GB HBM3
+#  Rank  8 Group  0 Pid 132241 on       g205 device  0 [0000:19:00] NVIDIA H100 80GB HBM3
+#  Rank  9 Group  0 Pid 132242 on       g205 device  1 [0000:3b:00] NVIDIA H100 80GB HBM3
+#  Rank 10 Group  0 Pid 132243 on       g205 device  2 [0000:4c:00] NVIDIA H100 80GB HBM3
+#  Rank 11 Group  0 Pid 132244 on       g205 device  3 [0000:5d:00] NVIDIA H100 80GB HBM3
+#  Rank 12 Group  0 Pid 132245 on       g205 device  4 [0000:9b:00] NVIDIA H100 80GB HBM3
+#  Rank 13 Group  0 Pid 132246 on       g205 device  5 [0000:bb:00] NVIDIA H100 80GB HBM3
+#  Rank 14 Group  0 Pid 132247 on       g205 device  6 [0000:cb:00] NVIDIA H100 80GB HBM3
+#  Rank 15 Group  0 Pid 132248 on       g205 device  7 [0000:db:00] NVIDIA H100 80GB HBM3
+#  Rank 16 Group  0 Pid 107054 on       g244 device  0 [0000:19:00] NVIDIA H100 80GB HBM3
+#  Rank 17 Group  0 Pid 107055 on       g244 device  1 [0000:3b:00] NVIDIA H100 80GB HBM3
+#  Rank 18 Group  0 Pid 107056 on       g244 device  2 [0000:4c:00] NVIDIA H100 80GB HBM3
+#  Rank 19 Group  0 Pid 107057 on       g244 device  3 [0000:5d:00] NVIDIA H100 80GB HBM3
+#  Rank 20 Group  0 Pid 107058 on       g244 device  4 [0000:9b:00] NVIDIA H100 80GB HBM3
+#  Rank 21 Group  0 Pid 107060 on       g244 device  5 [0000:bb:00] NVIDIA H100 80GB HBM3
+#  Rank 22 Group  0 Pid 107061 on       g244 device  6 [0000:cb:00] NVIDIA H100 80GB HBM3
+#  Rank 23 Group  0 Pid 107063 on       g244 device  7 [0000:db:00] NVIDIA H100 80GB HBM3
+#  Rank 24 Group  0 Pid 453376 on       g150 device  0 [0000:19:00] NVIDIA H100 80GB HBM3
+#  Rank 25 Group  0 Pid 453377 on       g150 device  1 [0000:3b:00] NVIDIA H100 80GB HBM3
+#  Rank 26 Group  0 Pid 453378 on       g150 device  2 [0000:4c:00] NVIDIA H100 80GB HBM3
+#  Rank 27 Group  0 Pid 453379 on       g150 device  3 [0000:5d:00] NVIDIA H100 80GB HBM3
+#  Rank 28 Group  0 Pid 453380 on       g150 device  4 [0000:9b:00] NVIDIA H100 80GB HBM3
+#  Rank 29 Group  0 Pid 453381 on       g150 device  5 [0000:bb:00] NVIDIA H100 80GB HBM3
+#  Rank 30 Group  0 Pid 453382 on       g150 device  6 [0000:cb:00] NVIDIA H100 80GB HBM3
+#  Rank 31 Group  0 Pid 453383 on       g150 device  7 [0000:db:00] NVIDIA H100 80GB HBM3
+
+[2026-02-24 22:53:37] g205:132246:132246 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g205:132246:132246 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g205: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g205 pid 132246: Test failure common.cu:1359
+ .. g205 pid 132246: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g205:132247:132247 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g205:132247:132247 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g205: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g205 pid 132247: Test failure common.cu:1359
+ .. g205 pid 132247: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g150:453376:453376 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g150:453376:453376 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g150: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g150 pid 453376: Test failure common.cu:1359
+ .. g150 pid 453376: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g244:107063:107063 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g244:107063:107063 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g244: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g244 pid 107063: Test failure common.cu:1359
+ .. g244 pid 107063: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g205:132248:132248 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g205:132248:132248 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g205: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g205 pid 132248: Test failure common.cu:1359
+ .. g205 pid 132248: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g150:453377:453377 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g150:453377:453377 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g150: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g150 pid 453377: Test failure common.cu:1359
+ .. g150 pid 453377: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g205:132241:132241 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g205:132241:132241 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g205: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g205 pid 132241: Test failure common.cu:1359
+ .. g205 pid 132241: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g150:453378:453378 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g150:453378:453378 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g150: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g150 pid 453378: Test failure common.cu:1359
+ .. g150 pid 453378: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g205:132242:132242 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g205:132242:132242 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g205: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g205 pid 132242: Test failure common.cu:1359
+ .. g205 pid 132242: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g150:453379:453379 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g150:453379:453379 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g150: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g150 pid 453379: Test failure common.cu:1359
+ .. g150 pid 453379: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g205:132243:132243 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g205:132243:132243 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g205: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g205 pid 132243: Test failure common.cu:1359
+ .. g205 pid 132243: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g150:453380:453380 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g150:453380:453380 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g150: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g150 pid 453380: Test failure common.cu:1359
+ .. g150 pid 453380: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g205:132244:132244 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g205:132244:132244 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g205: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g205 pid 132244: Test failure common.cu:1359
+ .. g205 pid 132244: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g150:453381:453381 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g150:453381:453381 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g150: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g150 pid 453381: Test failure common.cu:1359
+ .. g150 pid 453381: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g244:107054:107054 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g244:107054:107054 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g244: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g244 pid 107054: Test failure common.cu:1359
+ .. g244 pid 107054: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g205:132245:132245 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g205:132245:132245 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g205: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g205 pid 132245: Test failure common.cu:1359
+ .. g205 pid 132245: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g150:453382:453382 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g150:453382:453382 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g150: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g150 pid 453382: Test failure common.cu:1359
+ .. g150 pid 453382: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g244:107055:107055 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g244:107055:107055 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g244: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g244 pid 107055: Test failure common.cu:1359
+ .. g244 pid 107055: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g150:453383:453383 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g150:453383:453383 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g150: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g150 pid 453383: Test failure common.cu:1359
+ .. g150 pid 453383: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g244:107056:107056 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g244:107056:107056 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g244: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g244 pid 107056: Test failure common.cu:1359
+ .. g244 pid 107056: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g244:107057:107057 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g244:107057:107057 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g244: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g244 pid 107057: Test failure common.cu:1359
+ .. g244 pid 107057: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g244:107058:107058 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g244:107058:107058 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g244: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g244 pid 107058: Test failure common.cu:1359
+ .. g244 pid 107058: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g244:107060:107060 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g244:107060:107060 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g244: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g244 pid 107060: Test failure common.cu:1359
+ .. g244 pid 107060: Test failure common.cu:1189
+
+[2026-02-24 22:53:37] g244:107061:107061 [0] misc/cudawrap.cc:270 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+
+[2026-02-24 22:53:37] g244:107061:107061 [0] init.cc:2297 NCCL WARN Cuda failure 'CUDA driver version is insufficient for CUDA runtime version'
+g244: Test NCCL failure common.cu:204 'unhandled cuda error (run with NCCL_DEBUG=INFO for details) / '
+ .. g244 pid 107061: Test failure common.cu:1359
+ .. g244 pid 107061: Test failure common.cu:1189
+NCCL version 2.24.3+cuda12.6
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[24169,1],18]
+  Exit code:    3
+--------------------------------------------------------------------------

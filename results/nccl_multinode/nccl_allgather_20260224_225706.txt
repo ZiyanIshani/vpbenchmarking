@@ -1,0 +1,82 @@
+Warning: Permanently added '10.15.25.105' (ED25519) to the list of known hosts.
+Warning: Permanently added '10.15.28.33' (ED25519) to the list of known hosts.
+Warning: Permanently added '10.15.22.49' (ED25519) to the list of known hosts.
+# nccl-tests version 2.17.9 nccl-headers=22403 nccl-library=22403
+# Collective test starting: all_gather_perf
+# nThread 1 nGpus 1 minBytes 8 maxBytes 8589934592 step: 2(factor) warmup iters: 1 iters: 20 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 156746 on       g138 device  0 [0000:19:00] NVIDIA H100 80GB HBM3
+#  Rank  1 Group  0 Pid 156747 on       g138 device  1 [0000:3b:00] NVIDIA H100 80GB HBM3
+#  Rank  2 Group  0 Pid 156748 on       g138 device  2 [0000:4c:00] NVIDIA H100 80GB HBM3
+#  Rank  3 Group  0 Pid 156749 on       g138 device  3 [0000:5d:00] NVIDIA H100 80GB HBM3
+#  Rank  4 Group  0 Pid 156750 on       g138 device  4 [0000:9b:00] NVIDIA H100 80GB HBM3
+#  Rank  5 Group  0 Pid 156751 on       g138 device  5 [0000:bb:00] NVIDIA H100 80GB HBM3
+#  Rank  6 Group  0 Pid 156752 on       g138 device  6 [0000:cb:00] NVIDIA H100 80GB HBM3
+#  Rank  7 Group  0 Pid 156753 on       g138 device  7 [0000:db:00] NVIDIA H100 80GB HBM3
+#  Rank  8 Group  0 Pid 134791 on       g205 device  0 [0000:19:00] NVIDIA H100 80GB HBM3
+#  Rank  9 Group  0 Pid 134792 on       g205 device  1 [0000:3b:00] NVIDIA H100 80GB HBM3
+#  Rank 10 Group  0 Pid 134793 on       g205 device  2 [0000:4c:00] NVIDIA H100 80GB HBM3
+#  Rank 11 Group  0 Pid 134794 on       g205 device  3 [0000:5d:00] NVIDIA H100 80GB HBM3
+#  Rank 12 Group  0 Pid 134795 on       g205 device  4 [0000:9b:00] NVIDIA H100 80GB HBM3
+#  Rank 13 Group  0 Pid 134796 on       g205 device  5 [0000:bb:00] NVIDIA H100 80GB HBM3
+#  Rank 14 Group  0 Pid 134797 on       g205 device  6 [0000:cb:00] NVIDIA H100 80GB HBM3
+#  Rank 15 Group  0 Pid 134798 on       g205 device  7 [0000:db:00] NVIDIA H100 80GB HBM3
+#  Rank 16 Group  0 Pid 109501 on       g244 device  0 [0000:19:00] NVIDIA H100 80GB HBM3
+#  Rank 17 Group  0 Pid 109502 on       g244 device  1 [0000:3b:00] NVIDIA H100 80GB HBM3
+#  Rank 18 Group  0 Pid 109503 on       g244 device  2 [0000:4c:00] NVIDIA H100 80GB HBM3
+#  Rank 19 Group  0 Pid 109504 on       g244 device  3 [0000:5d:00] NVIDIA H100 80GB HBM3
+#  Rank 20 Group  0 Pid 109505 on       g244 device  4 [0000:9b:00] NVIDIA H100 80GB HBM3
+#  Rank 21 Group  0 Pid 109506 on       g244 device  5 [0000:bb:00] NVIDIA H100 80GB HBM3
+#  Rank 22 Group  0 Pid 109507 on       g244 device  6 [0000:cb:00] NVIDIA H100 80GB HBM3
+#  Rank 23 Group  0 Pid 109508 on       g244 device  7 [0000:db:00] NVIDIA H100 80GB HBM3
+#  Rank 24 Group  0 Pid 455809 on       g150 device  0 [0000:19:00] NVIDIA H100 80GB HBM3
+#  Rank 25 Group  0 Pid 455810 on       g150 device  1 [0000:3b:00] NVIDIA H100 80GB HBM3
+#  Rank 26 Group  0 Pid 455811 on       g150 device  2 [0000:4c:00] NVIDIA H100 80GB HBM3
+#  Rank 27 Group  0 Pid 455812 on       g150 device  3 [0000:5d:00] NVIDIA H100 80GB HBM3
+#  Rank 28 Group  0 Pid 455813 on       g150 device  4 [0000:9b:00] NVIDIA H100 80GB HBM3
+#  Rank 29 Group  0 Pid 455814 on       g150 device  5 [0000:bb:00] NVIDIA H100 80GB HBM3
+#  Rank 30 Group  0 Pid 455815 on       g150 device  6 [0000:cb:00] NVIDIA H100 80GB HBM3
+#  Rank 31 Group  0 Pid 455816 on       g150 device  7 [0000:db:00] NVIDIA H100 80GB HBM3
+NCCL version 2.24.3+cuda12.6
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw  #wrong     time   algbw   busbw  #wrong 
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)             (us)  (GB/s)  (GB/s)         
+           0             0     float    none      -1     0.25    0.00    0.00       0     0.23    0.00    0.00       0
+           0             0     float    none      -1     0.23    0.00    0.00       0     0.23    0.00    0.00       0
+           0             0     float    none      -1     0.23    0.00    0.00       0     0.23    0.00    0.00       0
+           0             0     float    none      -1     0.23    0.00    0.00       0     0.23    0.00    0.00       0
+           0             0     float    none      -1     0.23    0.00    0.00       0     0.23    0.00    0.00       0
+           0             0     float    none      -1     0.23    0.00    0.00       0     0.23    0.00    0.00       0
+         512             4     float    none      -1    49.68    0.01    0.01       0    50.72    0.01    0.01       0
+        1024             8     float    none      -1    52.95    0.02    0.02       0    50.56    0.02    0.02       0
+        2048            16     float    none      -1    53.87    0.04    0.04       0    51.69    0.04    0.04       0
+        4096            32     float    none      -1    54.41    0.08    0.07       0    55.19    0.07    0.07       0
+        8192            64     float    none      -1    55.14    0.15    0.14       0    54.79    0.15    0.14       0
+       16384           128     float    none      -1    55.76    0.29    0.28       0    52.74    0.31    0.30       0
+       32768           256     float    none      -1    54.04    0.61    0.59       0    54.00    0.61    0.59       0
+       65536           512     float    none      -1    59.51    1.10    1.07       0    59.70    1.10    1.06       0
+      131072          1024     float    none      -1    64.99    2.02    1.95       0    62.02    2.11    2.05       0
+      262144          2048     float    none      -1    74.53    3.52    3.41       0    73.65    3.56    3.45       0
+      524288          4096     float    none      -1    73.42    7.14    6.92       0    75.06    6.98    6.77       0
+     1048576          8192     float    none      -1   109.53    9.57    9.27       0   109.01    9.62    9.32       0
+     2097152         16384     float    none      -1   110.75   18.94   18.34       0   110.96   18.90   18.31       0
+     4194304         32768     float    none      -1   193.20   21.71   21.03       0   192.60   21.78   21.10       0
+     8388608         65536     float    none      -1   207.31   40.46   39.20       0   209.46   40.05   38.80       0
+    16777216        131072     float    none      -1   233.04   71.99   69.74       0   235.19   71.34   69.11       0
+    33554432        262144     float    none      -1   308.95  108.61  105.21       0   305.32  109.90  106.46       0
+    67108864        524288     float    none      -1   390.73  171.75  166.39       0   386.79  173.50  168.08       0
+   134217728       1048576     float    none      -1   749.73  179.02  173.43       0   745.11  180.13  174.50       0
+   268435456       2097152     float    none      -1  1105.06  242.91  235.32       0  1099.08  244.24  236.60       0
+   536870912       4194304     float    none      -1  1817.23  295.43  286.20       0  1800.78  298.13  288.82       0
+  1073741824       8388608     float    none      -1  3244.99  330.89  320.55       0  3229.61  332.47  322.08       0
+  2147483648      16777216     float    none      -1  6452.15  332.83  322.43       0  6394.15  335.85  325.36       0
+  4294967296      33554432     float    none      -1  12851.2  334.21  323.76       0  12734.1  337.28  326.74       0
+  8589934592      67108864     float    none      -1  25720.7  333.97  323.53       0  25438.7  337.67  327.12       0
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 78.6422 
+#
+# Collective test concluded: all_gather_perf
+#
+
