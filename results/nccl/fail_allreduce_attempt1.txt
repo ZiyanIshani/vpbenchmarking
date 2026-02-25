@@ -1,0 +1,55 @@
+# nccl-tests version 2.17.9 nccl-headers=22903 nccl-library=22903
+# Collective test starting: all_reduce_perf
+# nThread 1 nGpus 1 minBytes 8 maxBytes 8589934592 step: 2(factor) warmup iters: 1 iters: 20 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+ .. g138 pid 147516: Test failure common.cu:1189
+Invalid number of GPUs: 97 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+Invalid number of GPUs: 79 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+ .. g138 pid 147464: Test failure common.cu:1189
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+ .. g138 pid 147439: Test failure common.cu:1189
+ .. g138 pid 147465: Test failure common.cu:1189
+ .. g138 pid 147472: Test failure common.cu:1189
+ .. g138 pid 147484: Test failure common.cu:1189
+ .. g138 pid 147554: Test failure common.cu:1189
+ .. g138 pid 147505: Test failure common.cu:1189
+ .. g138 pid 147284: Test failure common.cu:1189
+ .. g138 pid 147329: Test failure common.cu:1189
+ .. g138 pid 147433: Test failure common.cu:1189
+ .. g138 pid 147400: Test failure common.cu:1189
+ .. g138 pid 147427: Test failure common.cu:1189
+Invalid number of GPUs: 67 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+Invalid number of GPUs: 81 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+Invalid number of GPUs: 83 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+Invalid number of GPUs: 87 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+Invalid number of GPUs: 88 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+Invalid number of GPUs: 93 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+Invalid number of GPUs: 14 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+Invalid number of GPUs: 22 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+Invalid number of GPUs: 44 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+Invalid number of GPUs: 57 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+Invalid number of GPUs: 59 requested but only 8 were found.
+Please check the number of processes and GPUs per process.
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[15537,1],78]
+  Exit code:    5
+--------------------------------------------------------------------------
