@@ -1,160 +1,168 @@
-# Voltage Park Benchmark — Multi-Node NCCL Tests
+# Voltage Park Benchmark — STREAM / NVBench Memory Bandwidth
 
 ## Goal
-Run cross-node NCCL collective benchmarks across 4 nodes x 8 H100 GPUs = 32 GPUs total.
-Measure bandwidth (GB/s) and latency (µs) for AllReduce, AllGather, and Broadcast over
-3.2 Tbps InfiniBand.
+Measure memory bandwidth across three channels:
+1. CPU host memory bandwidth (STREAM)
+2. Host-to-Device and Device-to-Host GPU transfer bandwidth (cuda-samples bandwidthTest)
+3. Device-to-Device GPU memory bandwidth (cuda-samples bandwidthTest)
 
-## Cluster
-| Node | Internal IP   |
-|------|--------------|
-| g138 | 10.15.21.81  |
-| n2   | 10.15.25.105 |
-| n3   | 10.15.28.33  |
-| n4   | 10.15.22.49  |
-
-Primary node (run all commands from here): 10.15.21.81
-SSH access to all other nodes is passwordless as ubuntu@<ip>.
+## Cluster Context
+- Node: g138 (10.15.21.81)
+- GPUs: 8x NVIDIA H100 80GB HBM3
+- CPUs: 104x Intel Xeon Platinum 8470
+- CUDA: 12.6
 
 ## Project Structure
+All results go to ~/vp-benchmarks/results/stream_nvbench/
 ~/vp-benchmarks/
 ├── CLAUDE.md
-├── hostfile
 ├── results/
-│   └── nccl_multinode/
-│       ├── nccl_allreduce_<timestamp>.txt
-│       ├── nccl_allgather_<timestamp>.txt
-│       ├── nccl_broadcast_<timestamp>.txt
-│       └── nccl_multinode_summary.md
+│   └── stream_nvbench/
+│       ├── stream_<timestamp>.txt
+│       ├── bandwidth_h2d_d2h_<timestamp>.txt
+│       ├── bandwidth_d2d_<timestamp>.txt
+│       └── stream_nvbench_summary.md
 └── scripts/
-    └── nccl/
-        └── nccl-tests/               ← already built on primary node
+    └── stream_nvbench/
 
-## Step 1: Create hostfile
+## Setup
 ```bash
-cat > ~/vp-benchmarks/hostfile << 'HOSTEOF'
-10.15.21.81 slots=8
-10.15.25.105 slots=8
-10.15.28.33 slots=8
-10.15.22.49 slots=8
-HOSTEOF
+mkdir -p ~/vp-benchmarks/results/stream_nvbench
+mkdir -p ~/vp-benchmarks/scripts/stream_nvbench
 ```
 
-## Step 2: Install nccl-tests on all other nodes
-SSH into each of the 3 remote nodes and run the following.
-nccl-tests is already built on 10.15.21.81 — replicate to others:
+## Step 1: STREAM (CPU Host Memory Bandwidth)
+
+### Build
 ```bash
-for NODE in 10.15.25.105 10.15.28.33 10.15.22.49; do
-  echo "Setting up $NODE..."
-  ssh ubuntu@$NODE "mkdir -p ~/vp-benchmarks/scripts/nccl"
-  scp -r ~/vp-benchmarks/scripts/nccl/nccl-tests ubuntu@$NODE:~/vp-benchmarks/scripts/nccl/
-  # Verify GPU visibility on each node
-  ssh ubuntu@$NODE "nvidia-smi --query-gpu=name --format=csv,noheader | wc -l"
-done
+cd ~/vp-benchmarks/scripts/stream_nvbench
+git clone https://github.com/jeffhammond/STREAM.git
+cd STREAM
+gcc -O3 -march=native -fopenmp \
+    -DSTREAM_ARRAY_SIZE=80000000 \
+    -DNTIMES=20 \
+    stream.c -o stream
 ```
 
-If scp fails or binaries are incompatible, build from source on each node instead:
+If gcc is missing: `sudo apt-get install -y build-essential`
+
+### Run
 ```bash
-for NODE in 10.15.25.105 10.15.28.33 10.15.22.49; do
-  ssh ubuntu@$NODE "
-    sudo apt-get install -y build-essential openmpi-bin libopenmpi-dev libnccl2 libnccl-dev &&
-    mkdir -p ~/vp-benchmarks/scripts/nccl &&
-    cd ~/vp-benchmarks/scripts/nccl &&
-    git clone https://github.com/NVIDIA/nccl-tests.git &&
-    cd nccl-tests &&
-    make MPI=1 MPI_HOME=/usr/lib/x86_64-linux-gnu/openmpi CUDA_HOME=/usr/local/cuda NCCL_HOME=/usr/lib/x86_64-linux-gnu
-  "
-done
-```
-
-## Step 3: Verify cluster connectivity
-```bash
-# Verify all 32 GPUs visible across nodes
-for NODE in 10.15.21.81 10.15.25.105 10.15.28.33 10.15.22.49; do
-  echo -n "$NODE GPUs: "
-  ssh ubuntu@$NODE "nvidia-smi --query-gpu=name --format=csv,noheader | wc -l"
-done
-
-# Test MPI across all nodes
-mpirun -np 4 --hostfile ~/vp-benchmarks/hostfile \
-  -x NCCL_DEBUG=WARN \
-  hostname
-```
-
-If MPI fails, try adding: `--mca btl_tcp_if_include enp157s0f0np0`
-(this is the active network interface on the primary node)
-
-## Step 4: Run benchmarks
-```bash
-mkdir -p ~/vp-benchmarks/results/nccl_multinode
-cd ~/vp-benchmarks
 TS=$(date +%Y%m%d_%H%M%S)
-
-MPIFLAGS="-np 32 \
-  --hostfile hostfile \
-  --map-by ppr:8:node \
-  -x NCCL_DEBUG=WARN \
-  -x NCCL_SOCKET_IFNAME=enp157s0f0np0 \
-  -x NCCL_IB_DISABLE=0 \
-  -x LD_LIBRARY_PATH \
-  --mca btl_tcp_if_include enp157s0f0np0"
-
-# AllReduce
-mpirun $MPIFLAGS \
-  scripts/nccl/nccl-tests/build/all_reduce_perf \
-  -b 8 -e 8G -f 2 -g 1 2>&1 | tee results/nccl_multinode/nccl_allreduce_${TS}.txt
-
-# AllGather
-mpirun $MPIFLAGS \
-  scripts/nccl/nccl-tests/build/all_gather_perf \
-  -b 8 -e 8G -f 2 -g 1 2>&1 | tee results/nccl_multinode/nccl_allgather_${TS}.txt
-
-# Broadcast
-mpirun $MPIFLAGS \
-  scripts/nccl/nccl-tests/build/broadcast_perf \
-  -b 8 -e 8G -f 2 -g 1 2>&1 | tee results/nccl_multinode/nccl_broadcast_${TS}.txt
+OMP_NUM_THREADS=$(nproc) ./stream 2>&1 | \
+    tee ~/vp-benchmarks/results/stream_nvbench/stream_${TS}.txt
 ```
 
-## Step 5: Write summary
-Parse peak bandwidth and minimum latency from each result file and write to
-~/vp-benchmarks/results/nccl_multinode/nccl_multinode_summary.md:
+### What to record
+From the output, extract all 4 operation bandwidths:
+- Copy (GB/s)
+- Scale (GB/s)
+- Add (GB/s)
+- Triad (GB/s) ← primary metric per proposal
 
-# NCCL Multi-Node Benchmark Results
+---
+
+## Step 2: NVBench — Host-Device Bandwidth (cuda-samples bandwidthTest)
+
+### Build
+```bash
+cd ~/vp-benchmarks/scripts/stream_nvbench
+git clone https://github.com/NVIDIA/cuda-samples.git
+cd cuda-samples/Samples/1_Utilities/bandwidthTest
+make
+```
+
+If make fails, check CUDA path:
+```bash
+which nvcc
+ls /usr/local/cuda/bin/nvcc
+```
+Then retry with: `make CUDA_PATH=/usr/local/cuda`
+
+### Run H2D and D2H
+```bash
+TS=$(date +%Y%m%d_%H%M%S)
+./bandwidthTest --mode=shmoo --memory=pinned --htod --dtoh 2>&1 | \
+    tee ~/vp-benchmarks/results/stream_nvbench/bandwidth_h2d_d2h_${TS}.txt
+```
+
+### What to record
+- Peak H2D bandwidth (GB/s)
+- Peak D2H bandwidth (GB/s)
+
+---
+
+## Step 3: NVBench — Device-Device Bandwidth
+
+### Run D2D
+```bash
+TS=$(date +%Y%m%d_%H%M%S)
+./bandwidthTest --mode=shmoo --memory=pinned --dtod 2>&1 | \
+    tee ~/vp-benchmarks/results/stream_nvbench/bandwidth_d2d_${TS}.txt
+```
+
+### What to record
+- Peak D2D bandwidth (GB/s)
+
+---
+
+## Step 4: Write Summary
+Parse all result files and write to
+~/vp-benchmarks/results/stream_nvbench/stream_nvbench_summary.md:
+
+# STREAM / NVBench Memory Bandwidth Results
 Date: <timestamp>
-Nodes: 4 x g138-cluster (10.15.21.81, 10.15.25.105, 10.15.28.33, 10.15.22.49)
-GPUs: 32 x NVIDIA H100 80GB HBM3 (8 per node)
-Interconnect: 3.2 Tbps InfiniBand
+Node: g138
+GPUs: 8x NVIDIA H100 80GB HBM3
+CPUs: 104x Intel Xeon Platinum 8470 ($(nproc) threads)
 CUDA: 12.6
-NCCL: 2.24.3
 
-| Test      | Message Size | Algo BW (GB/s) | Bus BW (GB/s) | Latency (µs) |
-|-----------|-------------|----------------|---------------|-------------|
-| AllReduce | ...         | ...            | ...           | ...         |
-| AllGather | ...         | ...            | ...           | ...         |
-| Broadcast | ...         | ...            | ...           | ...         |
+## STREAM — CPU Host Memory Bandwidth
+| Operation | Bandwidth (GB/s) |
+|-----------|-----------------|
+| Copy      | ...             |
+| Scale     | ...             |
+| Add       | ...             |
+| Triad     | ...             |
 
-### Comparison vs Single-Node
-| Test      | Single-Node Bus BW | Multi-Node Bus BW | Efficiency % |
-|-----------|--------------------|-------------------|-------------|
-| AllReduce | 479.72 GB/s        | ...               | ...         |
-| AllGather | 183.09 GB/s        | ...               | ...         |
-| Broadcast | 212.86 GB/s        | ...               | ...         |
+**Theoretical peak:** Intel Xeon Platinum 8470 = 307.2 GB/s per socket,
+2 sockets = ~614 GB/s total DDR5 bandwidth
 
-## Step 6: Commit results
+## NVBench — GPU Transfer Bandwidth
+| Transfer Direction | Peak Bandwidth (GB/s) |
+|-------------------|----------------------|
+| Host to Device (H2D) | ...              |
+| Device to Host (D2H) | ...              |
+| Device to Device (D2D) | ...            |
+
+**H100 HBM3 theoretical peak:** 3.35 TB/s device memory bandwidth
+
+## Analysis
+- STREAM Triad efficiency: <measured> / 614 GB/s = <pct>%
+- H100 D2D efficiency: <measured> / 3350 GB/s = <pct>%
+- Note any bottlenecks observed
+
+## Raw Log Files
+- stream_<timestamp>.txt
+- bandwidth_h2d_d2h_<timestamp>.txt
+- bandwidth_d2d_<timestamp>.txt
+
+---
+
+## Step 5: Commit Results
 ```bash
 cd ~/vp-benchmarks
-git add results/nccl_multinode/nccl_multinode_summary.md hostfile
-git commit -m "results: multi-node NCCL benchmarks $(date +%Y%m%d_%H%M%S)"
+git add results/stream_nvbench/
+git commit -m "results: STREAM/NVBench memory bandwidth $(date +%Y%m%d_%H%M%S)"
 git push origin master
 ```
 
 ## Error Handling
-- If MPI can't find hosts: check hostfile formatting, verify SSH works manually
-- If NCCL falls back to TCP: set NCCL_IB_DISABLE=0 and verify ibstat shows active IB ports
-- If bandwidth is unexpectedly low (<50 GB/s): run ibstat to check IB link speed
-- If a node is unreachable mid-run: verify with ping, do not proceed until all 4 nodes respond
-- Fix all errors before running the next collective
+- If STREAM array size causes OOM: reduce STREAM_ARRAY_SIZE to 40000000
+- If bandwidthTest make fails: check CUDA_PATH and nvcc location
+- If D2D bandwidth seems low: verify GPUs are on same NVLink domain with nvidia-smi topo -m
+- Fix errors before moving to next test
 
 ## Done
-When nccl_multinode_summary.md is written and committed, stop and report results.
+When stream_nvbench_summary.md is written and committed, stop and report results.
 Do not run any other benchmarks.
