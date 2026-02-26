@@ -1,0 +1,349 @@
+HPCG-NVIDIA 24.09.0  -- NVIDIA accelerated HPCG benchmark -- NVIDIA
+Build v0.5.6 
+
+Start of application (GPU-Only) ...
+Initial Residual = 5660.69
+Iteration = 1   Scaled Residual = 0.185784
+Iteration = 2   Scaled Residual = 0.101895
+Iteration = 3   Scaled Residual = 0.0702417
+Iteration = 4   Scaled Residual = 0.0535779
+Iteration = 5   Scaled Residual = 0.0432483
+Iteration = 6   Scaled Residual = 0.0362099
+Iteration = 7   Scaled Residual = 0.0311113
+Iteration = 8   Scaled Residual = 0.0272601
+Iteration = 9   Scaled Residual = 0.024258
+Iteration = 10   Scaled Residual = 0.0218527
+Iteration = 11   Scaled Residual = 0.0198749
+Iteration = 12   Scaled Residual = 0.0182086
+Iteration = 13   Scaled Residual = 0.0167737
+Iteration = 14   Scaled Residual = 0.0155194
+Iteration = 15   Scaled Residual = 0.0144146
+Iteration = 16   Scaled Residual = 0.013439
+Iteration = 17   Scaled Residual = 0.0125782
+Iteration = 18   Scaled Residual = 0.0118184
+Iteration = 19   Scaled Residual = 0.0111438
+Iteration = 20   Scaled Residual = 0.0105383
+Iteration = 21   Scaled Residual = 0.00998638
+Iteration = 22   Scaled Residual = 0.00947486
+Iteration = 23   Scaled Residual = 0.00899637
+Iteration = 24   Scaled Residual = 0.00854847
+Iteration = 25   Scaled Residual = 0.00813154
+Iteration = 26   Scaled Residual = 0.00774738
+Iteration = 27   Scaled Residual = 0.00739622
+Iteration = 28   Scaled Residual = 0.00707525
+Iteration = 29   Scaled Residual = 0.00677956
+Iteration = 30   Scaled Residual = 0.00650279
+Iteration = 31   Scaled Residual = 0.00623988
+Iteration = 32   Scaled Residual = 0.00599226
+Iteration = 33   Scaled Residual = 0.00577533
+Iteration = 34   Scaled Residual = 0.0056367
+Iteration = 35   Scaled Residual = 0.00568736
+Iteration = 36   Scaled Residual = 0.00610771
+Iteration = 37   Scaled Residual = 0.006942
+Iteration = 38   Scaled Residual = 0.00731581
+Iteration = 39   Scaled Residual = 0.00570468
+Iteration = 40   Scaled Residual = 0.00347873
+Iteration = 41   Scaled Residual = 0.00270753
+Iteration = 42   Scaled Residual = 0.00303992
+Iteration = 43   Scaled Residual = 0.00252755
+Iteration = 44   Scaled Residual = 0.00206398
+Iteration = 45   Scaled Residual = 0.00192852
+Iteration = 46   Scaled Residual = 0.0016217
+Iteration = 47   Scaled Residual = 0.00150709
+Iteration = 48   Scaled Residual = 0.00116634
+Iteration = 49   Scaled Residual = 0.00115175
+Iteration = 50   Scaled Residual = 0.000821999
+GPU Rank Info:
+ | cuSPARSE version 12.5
+ | Reference CPU memory = 7486.28 MB
+ | GPU Name: 'NVIDIA H100 80GB HBM3' 
+ | GPU Memory Use: 14009 MB / 81109 MB
+ | Process Grid: 1x1x1
+ | Local Domain: 256x256x256
+ | Number of CPU Threads: 104
+ | Slice Size: 2048
+WARNING: PERFORMING UNPRECONDITIONED ITERATIONS
+Call [0] Number of Iterations [11] Scaled Residual [1.19541e-14]
+WARNING: PERFORMING UNPRECONDITIONED ITERATIONS
+Call [1] Number of Iterations [11] Scaled Residual [1.19541e-14]
+Call [0] Number of Iterations [1] Scaled Residual [2.98974e-16]
+Call [1] Number of Iterations [1] Scaled Residual [2.98974e-16]
+Departure from symmetry (scaled) for SpMV abs(x'*A*y - y'*A*x) = 5.26355e-11
+Departure from symmetry (scaled) for MG abs(x'*Minv*y - y'*Minv*x) = 5.26355e-11
+SpMV call [0] Residual [0]
+SpMV call [1] Residual [0]
+Initial Residual = 5660.69
+Iteration = 1   Scaled Residual = 0.220235
+Iteration = 2   Scaled Residual = 0.119149
+Iteration = 3   Scaled Residual = 0.0809705
+Iteration = 4   Scaled Residual = 0.0612431
+Iteration = 5   Scaled Residual = 0.0492562
+Iteration = 6   Scaled Residual = 0.041161
+Iteration = 7   Scaled Residual = 0.0353342
+Iteration = 8   Scaled Residual = 0.0309388
+Iteration = 9   Scaled Residual = 0.0274923
+Iteration = 10   Scaled Residual = 0.0247193
+Iteration = 11   Scaled Residual = 0.0224385
+Iteration = 12   Scaled Residual = 0.020524
+Iteration = 13   Scaled Residual = 0.0188963
+Iteration = 14   Scaled Residual = 0.0174932
+Iteration = 15   Scaled Residual = 0.0162695
+Iteration = 16   Scaled Residual = 0.0151935
+Iteration = 17   Scaled Residual = 0.0142388
+Iteration = 18   Scaled Residual = 0.0133861
+Iteration = 19   Scaled Residual = 0.0126197
+Iteration = 20   Scaled Residual = 0.0119267
+Iteration = 21   Scaled Residual = 0.0112972
+Iteration = 22   Scaled Residual = 0.0107225
+Iteration = 23   Scaled Residual = 0.0101958
+Iteration = 24   Scaled Residual = 0.00971071
+Iteration = 25   Scaled Residual = 0.00926136
+Iteration = 26   Scaled Residual = 0.00884324
+Iteration = 27   Scaled Residual = 0.00845185
+Iteration = 28   Scaled Residual = 0.00808324
+Iteration = 29   Scaled Residual = 0.00773544
+Iteration = 30   Scaled Residual = 0.00740814
+Iteration = 31   Scaled Residual = 0.00710561
+Iteration = 32   Scaled Residual = 0.00684031
+Iteration = 33   Scaled Residual = 0.00663551
+Iteration = 34   Scaled Residual = 0.00652877
+Iteration = 35   Scaled Residual = 0.00656666
+Iteration = 36   Scaled Residual = 0.00677368
+Iteration = 37   Scaled Residual = 0.00707007
+Iteration = 38   Scaled Residual = 0.0071373
+Iteration = 39   Scaled Residual = 0.00646633
+Iteration = 40   Scaled Residual = 0.00497092
+Iteration = 41   Scaled Residual = 0.00336782
+Iteration = 42   Scaled Residual = 0.00239591
+Iteration = 43   Scaled Residual = 0.0022639
+Iteration = 44   Scaled Residual = 0.00259115
+Iteration = 45   Scaled Residual = 0.00223772
+Iteration = 46   Scaled Residual = 0.00148997
+Iteration = 47   Scaled Residual = 0.00139567
+Iteration = 48   Scaled Residual = 0.00149001
+Iteration = 49   Scaled Residual = 0.000996729
+Iteration = 50   Scaled Residual = 0.000873809
+Iteration = 51   Scaled Residual = 0.000864875
+Iteration = 52   Scaled Residual = 0.000559582
+Call [0] Scaled Residual [0.000559582]
+Call [1] Scaled Residual [0.000559582]
+Call [2] Scaled Residual [0.000559582]
+Call [3] Scaled Residual [0.000559582]
+Call [4] Scaled Residual [0.000559582]
+Call [5] Scaled Residual [0.000559582]
+Call [6] Scaled Residual [0.000559582]
+Call [7] Scaled Residual [0.000559582]
+Call [8] Scaled Residual [0.000559582]
+Call [9] Scaled Residual [0.000559582]
+Call [10] Scaled Residual [0.000559582]
+Call [11] Scaled Residual [0.000559582]
+Call [12] Scaled Residual [0.000559582]
+Call [13] Scaled Residual [0.000559582]
+Call [14] Scaled Residual [0.000559582]
+Call [15] Scaled Residual [0.000559582]
+Call [16] Scaled Residual [0.000559582]
+Call [17] Scaled Residual [0.000559582]
+Call [18] Scaled Residual [0.000559582]
+Call [19] Scaled Residual [0.000559582]
+Call [20] Scaled Residual [0.000559582]
+Call [21] Scaled Residual [0.000559582]
+Call [22] Scaled Residual [0.000559582]
+Call [23] Scaled Residual [0.000559582]
+Call [24] Scaled Residual [0.000559582]
+Call [25] Scaled Residual [0.000559582]
+Call [26] Scaled Residual [0.000559582]
+Call [27] Scaled Residual [0.000559582]
+Call [28] Scaled Residual [0.000559582]
+Call [29] Scaled Residual [0.000559582]
+Call [30] Scaled Residual [0.000559582]
+Call [31] Scaled Residual [0.000559582]
+Call [32] Scaled Residual [0.000559582]
+Call [33] Scaled Residual [0.000559582]
+Call [34] Scaled Residual [0.000559582]
+Call [35] Scaled Residual [0.000559582]
+Call [36] Scaled Residual [0.000559582]
+Call [37] Scaled Residual [0.000559582]
+Call [38] Scaled Residual [0.000559582]
+Call [39] Scaled Residual [0.000559582]
+Call [40] Scaled Residual [0.000559582]
+Call [41] Scaled Residual [0.000559582]
+Call [42] Scaled Residual [0.000559582]
+Call [43] Scaled Residual [0.000559582]
+Call [44] Scaled Residual [0.000559582]
+Call [45] Scaled Residual [0.000559582]
+Call [46] Scaled Residual [0.000559582]
+Call [47] Scaled Residual [0.000559582]
+Call [48] Scaled Residual [0.000559582]
+Call [49] Scaled Residual [0.000559582]
+Call [50] Scaled Residual [0.000559582]
+Call [51] Scaled Residual [0.000559582]
+Call [52] Scaled Residual [0.000559582]
+Call [53] Scaled Residual [0.000559582]
+Call [54] Scaled Residual [0.000559582]
+Call [55] Scaled Residual [0.000559582]
+Call [56] Scaled Residual [0.000559582]
+Call [57] Scaled Residual [0.000559582]
+Call [58] Scaled Residual [0.000559582]
+Call [59] Scaled Residual [0.000559582]
+Call [60] Scaled Residual [0.000559582]
+Call [61] Scaled Residual [0.000559582]
+Call [62] Scaled Residual [0.000559582]
+Call [63] Scaled Residual [0.000559582]
+Call [64] Scaled Residual [0.000559582]
+Call [65] Scaled Residual [0.000559582]
+Call [66] Scaled Residual [0.000559582]
+Call [67] Scaled Residual [0.000559582]
+Call [68] Scaled Residual [0.000559582]
+Call [69] Scaled Residual [0.000559582]
+Call [70] Scaled Residual [0.000559582]
+Call [71] Scaled Residual [0.000559582]
+Call [72] Scaled Residual [0.000559582]
+Call [73] Scaled Residual [0.000559582]
+Call [74] Scaled Residual [0.000559582]
+Call [75] Scaled Residual [0.000559582]
+Call [76] Scaled Residual [0.000559582]
+Call [77] Scaled Residual [0.000559582]
+Call [78] Scaled Residual [0.000559582]
+Call [79] Scaled Residual [0.000559582]
+Call [80] Scaled Residual [0.000559582]
+Call [81] Scaled Residual [0.000559582]
+Call [82] Scaled Residual [0.000559582]
+Call [83] Scaled Residual [0.000559582]
+Call [84] Scaled Residual [0.000559582]
+Call [85] Scaled Residual [0.000559582]
+Call [86] Scaled Residual [0.000559582]
+Call [87] Scaled Residual [0.000559582]
+Call [88] Scaled Residual [0.000559582]
+Call [89] Scaled Residual [0.000559582]
+Call [90] Scaled Residual [0.000559582]
+Call [91] Scaled Residual [0.000559582]
+Call [92] Scaled Residual [0.000559582]
+Call [93] Scaled Residual [0.000559582]
+Call [94] Scaled Residual [0.000559582]
+Call [95] Scaled Residual [0.000559582]
+Call [96] Scaled Residual [0.000559582]
+Call [97] Scaled Residual [0.000559582]
+Call [98] Scaled Residual [0.000559582]
+Call [99] Scaled Residual [0.000559582]
+Call [100] Scaled Residual [0.000559582]
+Call [101] Scaled Residual [0.000559582]
+Call [102] Scaled Residual [0.000559582]
+HPCG-Benchmark
+version=3.1
+Release date=March 28, 2019
+Machine Summary=
+Machine Summary::Distributed Processes=1
+Machine Summary::Threads per processes=104
+Global Problem Dimensions=
+Global Problem Dimensions::Global nx=256
+Global Problem Dimensions::Global ny=256
+Global Problem Dimensions::Global nz=256
+Processor Dimensions=
+Processor Dimensions::npx=1
+Processor Dimensions::npy=1
+Processor Dimensions::npz=1
+Local Domain Dimensions=
+Local Domain Dimensions::nx=256
+Local Domain Dimensions::ny=256
+########## Problem Summary  ##########=
+Setup Information=
+Setup Information::Setup Time=0.021924
+Linear System Information=
+Linear System Information::Number of Equations=16777216
+Linear System Information::Number of Nonzero Terms=449455096
+Multigrid Information=
+Multigrid Information::Number of coarse grid levels=3
+Multigrid Information::Coarse Grids=
+Multigrid Information::Coarse Grids::Grid Level=1
+Multigrid Information::Coarse Grids::Number of Equations=2097152
+Multigrid Information::Coarse Grids::Number of Nonzero Terms=55742968
+Multigrid Information::Coarse Grids::Number of Presmoother Steps=1
+Multigrid Information::Coarse Grids::Number of Postsmoother Steps=1
+Multigrid Information::Coarse Grids::Grid Level=2
+Multigrid Information::Coarse Grids::Number of Equations=262144
+Multigrid Information::Coarse Grids::Number of Nonzero Terms=6859000
+Multigrid Information::Coarse Grids::Number of Presmoother Steps=1
+Multigrid Information::Coarse Grids::Number of Postsmoother Steps=1
+Multigrid Information::Coarse Grids::Grid Level=3
+Multigrid Information::Coarse Grids::Number of Equations=32768
+Multigrid Information::Coarse Grids::Number of Nonzero Terms=830584
+Multigrid Information::Coarse Grids::Number of Presmoother Steps=1
+Multigrid Information::Coarse Grids::Number of Postsmoother Steps=1
+########## Memory Use Summary  ##########=
+Memory Use Information=
+Memory Use Information::Total memory used for data (Gbytes)=11.9905
+Memory Use Information::Memory used for OptimizeProblem data (Gbytes)=0
+Memory Use Information::Bytes per equation (Total memory / Number of Equations)=714.69
+Memory Use Information::Memory used for linear system and CG (Gbytes)=10.5529
+Memory Use Information::Coarse Grids=
+Memory Use Information::Coarse Grids::Grid Level=1
+Memory Use Information::Coarse Grids::Memory used=1.26039
+Memory Use Information::Coarse Grids::Grid Level=2
+Memory Use Information::Coarse Grids::Memory used=0.15755
+Memory Use Information::Coarse Grids::Grid Level=3
+Memory Use Information::Coarse Grids::Memory used=0.0196946
+########## V&V Testing Summary  ##########=
+Spectral Convergence Tests=
+Spectral Convergence Tests::Result=PASSED
+Spectral Convergence Tests::Unpreconditioned=
+Spectral Convergence Tests::Unpreconditioned::Maximum iteration count=11
+Spectral Convergence Tests::Unpreconditioned::Expected iteration count=12
+Spectral Convergence Tests::Preconditioned=
+Spectral Convergence Tests::Preconditioned::Maximum iteration count=1
+Spectral Convergence Tests::Preconditioned::Expected iteration count=2
+Departure from Symmetry |x'Ay-y'Ax|/(2*||x||*||A||*||y||)/epsilon=
+Departure from Symmetry |x'Ay-y'Ax|/(2*||x||*||A||*||y||)/epsilon::Result=PASSED
+Departure from Symmetry |x'Ay-y'Ax|/(2*||x||*||A||*||y||)/epsilon::Departure for SpMV=5.26355e-11
+Departure from Symmetry |x'Ay-y'Ax|/(2*||x||*||A||*||y||)/epsilon::Departure for MG=5.26355e-11
+########## Iterations Summary  ##########=
+Iteration Count Information=
+Iteration Count Information::Result=PASSED
+Iteration Count Information::Reference CG iterations per set=50
+Iteration Count Information::Optimized CG iterations per set=52
+Iteration Count Information::Total number of reference iterations=5150
+Iteration Count Information::Total number of optimized iterations=5356
+########## Reproducibility Summary  ##########=
+Reproducibility Information=
+Reproducibility Information::Result=PASSED
+Reproducibility Information::Scaled residual mean=0.000559582
+Reproducibility Information::Scaled residual variance=0
+########## Performance Summary (times in sec) ##########=
+Benchmark Time Summary=
+Benchmark Time Summary::Optimization phase=0.0853096
+Benchmark Time Summary::DDOT=1.62839
+Benchmark Time Summary::WAXPBY=2.1532
+Benchmark Time Summary::SpMV=10.3981
+Benchmark Time Summary::MG=46.1432
+Benchmark Time Summary::Total=60.3247
+Floating Point Operations Summary=
+Floating Point Operations Summary::Raw DDOT=5.42609e+11
+Floating Point Operations Summary::Raw WAXPBY=5.42609e+11
+Floating Point Operations Summary::Raw SpMV=4.90715e+12
+Floating Point Operations Summary::Raw MG=2.74436e+13
+Floating Point Operations Summary::Total=3.34359e+13
+Floating Point Operations Summary::Total with convergence overhead=3.21499e+13
+GB/s Summary=
+GB/s Summary::Raw Read B/W=3414.52
+GB/s Summary::Raw Write B/W=789.159
+GB/s Summary::Raw Total B/W=4203.68
+GB/s Summary::Total with convergence and optimization phase overhead=3969.33
+GFLOP/s Summary=
+GFLOP/s Summary::Raw DDOT=333.218
+GFLOP/s Summary::Raw WAXPBY=252.001
+GFLOP/s Summary::Raw SpMV=471.93
+GFLOP/s Summary::Raw MG=594.748
+GFLOP/s Summary::Raw Total=554.266
+GFLOP/s Summary::Total with convergence overhead=532.949
+GFLOP/s Summary::Total with convergence and optimization phase overhead=523.366
+User Optimization Overheads=
+User Optimization Overheads::Optimization phase time (sec)=0.0853096
+User Optimization Overheads::Optimization phase time vs reference SpMV+MG time=0.0368868
+DDOT Timing Variations=
+DDOT Timing Variations::Min DDOT MPI_Allreduce time=0.0125656
+DDOT Timing Variations::Max DDOT MPI_Allreduce time=0.0125656
+DDOT Timing Variations::Avg DDOT MPI_Allreduce time=0.0125656
+Final Summary=
+Final Summary::HPCG result is VALID with a GFLOP/s rating of=523.366
+Final Summary::HPCG 2.4 rating for historical reasons is=525.297
+Final Summary::Results are valid but execution time (sec) is=60.3247
+Final Summary::Official results execution time (sec) must be at least=1800
