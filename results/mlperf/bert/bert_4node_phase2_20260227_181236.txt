@@ -1,0 +1,178 @@
+
+=============
+== PyTorch ==
+=============
+
+NVIDIA Release 24.09 (build 109656992)
+PyTorch Version 2.5.0a0+b465a58
+Container image Copyright (c) 2024, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+Copyright (c) 2014-2024 Facebook Inc.
+Copyright (c) 2011-2014 Idiap Research Institute (Ronan Collobert)
+Copyright (c) 2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+Copyright (c) 2011-2012 NEC Laboratories America (Koray Kavukcuoglu)
+Copyright (c) 2011-2013 NYU                      (Clement Farabet)
+Copyright (c) 2006-2010 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston)
+Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
+Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+Copyright (c) 2015      Google Inc.
+Copyright (c) 2015      Yangqing Jia
+Copyright (c) 2013-2016 The Caffe contributors
+All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+W0227 18:12:55.980000 1 torch/distributed/run.py:793] 
+W0227 18:12:55.980000 1 torch/distributed/run.py:793] *****************************************
+W0227 18:12:55.980000 1 torch/distributed/run.py:793] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0227 18:12:55.980000 1 torch/distributed/run.py:793] *****************************************
+[E227 18:13:51.024488985 socket.cpp:1011] [c10d] The client socket has timed out after 60000ms while trying to connect to (10.15.21.81, 29501).
+[W227 18:13:51.024754916 TCPStore.cpp:402] [c10d] TCP client failed to connect/validate to host 10.15.21.81:29501 - retrying (try=0, timeout=60000ms, delay=44725ms): The client socket has timed out after 60000ms while trying to connect to (10.15.21.81, 29501).
+Exception raised from throwTimeoutError at /opt/pytorch/pytorch/torch/csrc/distributed/c10d/socket.cpp:1013 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x98 (0x7fa3c2593cc8 in /usr/local/lib/python3.10/dist-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x51cdb4e (0x7fa3b9eddb4e in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #2: <unknown function> + 0x1072cd5 (0x7fa3b5d82cd5 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #3: <unknown function> + 0x521747b (0x7fa3b9f2747b in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #4: <unknown function> + 0x5217619 (0x7fa3b9f27619 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #5: <unknown function> + 0x52179c7 (0x7fa3b9f279c7 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #6: <unknown function> + 0x51c912b (0x7fa3b9ed912b in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #7: c10d::TCPStore::TCPStore(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, c10d::TCPStoreOptions const&) + 0x267 (0x7fa3b9edb737 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #8: <unknown function> + 0xceae74 (0x7fa3c1a58e74 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_python.so)
+frame #9: <unknown function> + 0x46c0f7 (0x7fa3c11da0f7 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_python.so)
+frame #10: <unknown function> + 0x15adae (0x55cc4c61edae in /usr/bin/python)
+frame #11: _PyObject_MakeTpCall + 0x25b (0x55cc4c61552b in /usr/bin/python)
+frame #12: <unknown function> + 0x16952b (0x55cc4c62d52b in /usr/bin/python)
+frame #13: _PyObject_Call + 0x118 (0x55cc4c62e0a8 in /usr/bin/python)
+frame #14: <unknown function> + 0x165dc7 (0x55cc4c629dc7 in /usr/bin/python)
+frame #15: <unknown function> + 0x1518db (0x55cc4c6158db in /usr/bin/python)
+frame #16: <unknown function> + 0x46995b (0x7fa3c11d795b in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_python.so)
+frame #17: _PyObject_MakeTpCall + 0x25b (0x55cc4c61552b in /usr/bin/python)
+frame #18: _PyEval_EvalFrameDefault + 0x7611 (0x55cc4c60e871 in /usr/bin/python)
+frame #19: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #20: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #21: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #22: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #23: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #24: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #25: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #26: _PyEval_EvalFrameDefault + 0x8cb (0x55cc4c607b2b in /usr/bin/python)
+frame #27: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #28: _PyEval_EvalFrameDefault + 0x64e2 (0x55cc4c60d742 in /usr/bin/python)
+frame #29: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #30: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #31: _PyObject_FastCallDictTstate + 0xc4 (0x55cc4c6146c4 in /usr/bin/python)
+frame #32: _PyObject_Call_Prepend + 0xc1 (0x55cc4c62a611 in /usr/bin/python)
+frame #33: <unknown function> + 0x281370 (0x55cc4c745370 in /usr/bin/python)
+frame #34: PyObject_Call + 0xbb (0x55cc4c62de9b in /usr/bin/python)
+frame #35: _PyEval_EvalFrameDefault + 0x2a49 (0x55cc4c609ca9 in /usr/bin/python)
+frame #36: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #37: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #38: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #39: _PyEval_EvalFrameDefault + 0x2a49 (0x55cc4c609ca9 in /usr/bin/python)
+frame #40: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #41: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #42: <unknown function> + 0x140096 (0x55cc4c604096 in /usr/bin/python)
+frame #43: PyEval_EvalCode + 0x86 (0x55cc4c6f9f66 in /usr/bin/python)
+frame #44: <unknown function> + 0x260e98 (0x55cc4c724e98 in /usr/bin/python)
+frame #45: <unknown function> + 0x25a79b (0x55cc4c71e79b in /usr/bin/python)
+frame #46: <unknown function> + 0x260be5 (0x55cc4c724be5 in /usr/bin/python)
+frame #47: _PyRun_SimpleFileObject + 0x1a8 (0x55cc4c7240c8 in /usr/bin/python)
+frame #48: _PyRun_AnyFileObject + 0x43 (0x55cc4c723d13 in /usr/bin/python)
+frame #49: Py_RunMain + 0x2be (0x55cc4c71670e in /usr/bin/python)
+frame #50: Py_BytesMain + 0x2d (0x55cc4c6ecdfd in /usr/bin/python)
+frame #51: <unknown function> + 0x29d90 (0x7fa3ce0e2d90 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #52: __libc_start_main + 0x80 (0x7fa3ce0e2e40 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #53: _start + 0x25 (0x55cc4c6eccf5 in /usr/bin/python)
+
+[E227 18:14:36.766196859 socket.cpp:1011] [c10d] The client socket has timed out after 60000ms while trying to connect to (10.15.21.81, 29501).
+[E227 18:14:36.766298456 TCPStore.cpp:390] [c10d] TCP client failed to connect/validate to host 10.15.21.81:29501 - timed out (try=1, timeout=60000ms): The client socket has timed out after 60000ms while trying to connect to (10.15.21.81, 29501).
+Exception raised from throwTimeoutError at /opt/pytorch/pytorch/torch/csrc/distributed/c10d/socket.cpp:1013 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0x98 (0x7fa3c2593cc8 in /usr/local/lib/python3.10/dist-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0x51cdb4e (0x7fa3b9eddb4e in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #2: <unknown function> + 0x1072cd5 (0x7fa3b5d82cd5 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #3: <unknown function> + 0x521747b (0x7fa3b9f2747b in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #4: <unknown function> + 0x5217619 (0x7fa3b9f27619 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #5: <unknown function> + 0x52179c7 (0x7fa3b9f279c7 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #6: <unknown function> + 0x51c912b (0x7fa3b9ed912b in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #7: c10d::TCPStore::TCPStore(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, c10d::TCPStoreOptions const&) + 0x267 (0x7fa3b9edb737 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_cpu.so)
+frame #8: <unknown function> + 0xceae74 (0x7fa3c1a58e74 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_python.so)
+frame #9: <unknown function> + 0x46c0f7 (0x7fa3c11da0f7 in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_python.so)
+frame #10: <unknown function> + 0x15adae (0x55cc4c61edae in /usr/bin/python)
+frame #11: _PyObject_MakeTpCall + 0x25b (0x55cc4c61552b in /usr/bin/python)
+frame #12: <unknown function> + 0x16952b (0x55cc4c62d52b in /usr/bin/python)
+frame #13: _PyObject_Call + 0x118 (0x55cc4c62e0a8 in /usr/bin/python)
+frame #14: <unknown function> + 0x165dc7 (0x55cc4c629dc7 in /usr/bin/python)
+frame #15: <unknown function> + 0x1518db (0x55cc4c6158db in /usr/bin/python)
+frame #16: <unknown function> + 0x46995b (0x7fa3c11d795b in /usr/local/lib/python3.10/dist-packages/torch/lib/libtorch_python.so)
+frame #17: _PyObject_MakeTpCall + 0x25b (0x55cc4c61552b in /usr/bin/python)
+frame #18: _PyEval_EvalFrameDefault + 0x7611 (0x55cc4c60e871 in /usr/bin/python)
+frame #19: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #20: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #21: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #22: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #23: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #24: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #25: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #26: _PyEval_EvalFrameDefault + 0x8cb (0x55cc4c607b2b in /usr/bin/python)
+frame #27: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #28: _PyEval_EvalFrameDefault + 0x64e2 (0x55cc4c60d742 in /usr/bin/python)
+frame #29: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #30: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #31: _PyObject_FastCallDictTstate + 0xc4 (0x55cc4c6146c4 in /usr/bin/python)
+frame #32: _PyObject_Call_Prepend + 0xc1 (0x55cc4c62a611 in /usr/bin/python)
+frame #33: <unknown function> + 0x281370 (0x55cc4c745370 in /usr/bin/python)
+frame #34: PyObject_Call + 0xbb (0x55cc4c62de9b in /usr/bin/python)
+frame #35: _PyEval_EvalFrameDefault + 0x2a49 (0x55cc4c609ca9 in /usr/bin/python)
+frame #36: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #37: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #38: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #39: _PyEval_EvalFrameDefault + 0x2a49 (0x55cc4c609ca9 in /usr/bin/python)
+frame #40: _PyFunction_Vectorcall + 0x7c (0x55cc4c61f6ac in /usr/bin/python)
+frame #41: _PyEval_EvalFrameDefault + 0x6d5 (0x55cc4c607935 in /usr/bin/python)
+frame #42: <unknown function> + 0x140096 (0x55cc4c604096 in /usr/bin/python)
+frame #43: PyEval_EvalCode + 0x86 (0x55cc4c6f9f66 in /usr/bin/python)
+frame #44: <unknown function> + 0x260e98 (0x55cc4c724e98 in /usr/bin/python)
+frame #45: <unknown function> + 0x25a79b (0x55cc4c71e79b in /usr/bin/python)
+frame #46: <unknown function> + 0x260be5 (0x55cc4c724be5 in /usr/bin/python)
+frame #47: _PyRun_SimpleFileObject + 0x1a8 (0x55cc4c7240c8 in /usr/bin/python)
+frame #48: _PyRun_AnyFileObject + 0x43 (0x55cc4c723d13 in /usr/bin/python)
+frame #49: Py_RunMain + 0x2be (0x55cc4c71670e in /usr/bin/python)
+frame #50: Py_BytesMain + 0x2d (0x55cc4c6ecdfd in /usr/bin/python)
+frame #51: <unknown function> + 0x29d90 (0x7fa3ce0e2d90 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #52: __libc_start_main + 0x80 (0x7fa3ce0e2e40 in /lib/x86_64-linux-gnu/libc.so.6)
+frame #53: _start + 0x25 (0x55cc4c6eccf5 in /usr/bin/python)
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/elastic/rendezvous/c10d_rendezvous_backend.py", line 158, in _create_tcp_store
+    store = TCPStore(
+torch.distributed.DistNetworkError: The client socket has timed out after 60000ms while trying to connect to (10.15.21.81, 29501).
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/bin/torchrun", line 33, in <module>
+    sys.exit(load_entry_point('torch==2.5.0a0+b465a5843b.nv24.9', 'console_scripts', 'torchrun')())
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/run.py", line 919, in main
+    run(args)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/run.py", line 910, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/launcher/api.py", line 241, in launch_agent
+    rdzv_handler=rdzv_registry.get_rendezvous_handler(rdzv_parameters),
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/elastic/rendezvous/registry.py", line 71, in get_rendezvous_handler
+    return handler_registry.create_handler(params)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/elastic/rendezvous/api.py", line 358, in create_handler
+    handler = creator(params)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/elastic/rendezvous/registry.py", line 41, in _create_c10d_handler
+    backend, store = create_backend(params)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/elastic/rendezvous/c10d_rendezvous_backend.py", line 257, in create_backend
+    store = _create_tcp_store(params)
+  File "/usr/local/lib/python3.10/dist-packages/torch/distributed/elastic/rendezvous/c10d_rendezvous_backend.py", line 183, in _create_tcp_store
+    raise RendezvousConnectionError(
+torch.distributed.elastic.rendezvous.api.RendezvousConnectionError: The connection to the C10d store has failed. See inner exception for details.

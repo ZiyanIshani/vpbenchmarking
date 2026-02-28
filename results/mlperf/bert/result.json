@@ -1,0 +1,7 @@
+{
+  "phase": 2,
+  "converged_step": 1400,
+  "mlm_accuracy": 0.7211900949478149,
+  "time_to_convergence_min": 154.8539187113444,
+  "world_size": 32
+}

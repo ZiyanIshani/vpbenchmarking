@@ -14,3 +14,10 @@ __pycache__/
 scripts/stream_nvbench/
 scripts/nccl/
 scripts/hpl_ai/
+
+CLAUDE.md
+
+# Large binary checkpoints
+*.pt
+*.pth
+*.ckpt
