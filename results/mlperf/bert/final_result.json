@@ -2,9 +2,9 @@
   "phase": 2,
   "converged": true,
   "final_step": 1400,
-  "best_mlm_accuracy": 0.7211900949478149,
-  "total_time_min": 154.85609881480534,
-  "avg_throughput_seq_s": 4937.4010614915915,
-  "world_size": 32,
+  "best_mlm_accuracy": 0.7208757400512695,
+  "total_time_min": 491.8462221622467,
+  "avg_throughput_seq_s": 1554.5238170284254,
+  "world_size": 8,
   "global_batch_size": 32768
 }

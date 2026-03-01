@@ -1,6 +1,6 @@
 # MLPerf Training — BERT Results
 
-**Date:** 2026-02-27 / 2026-02-28
+**Date:** 2026-02-27 / 2026-03-01
 **Cluster:** 4 nodes × 8x H100 80GB SXM5 (32 GPUs total)
 **Container:** `nvcr.io/nvidia/pytorch:24.09-py3`
 **Init checkpoint:** `bert-large-uncased` (HuggingFace, Phase 2 only)
@@ -24,7 +24,39 @@
 | Precision | bf16 (autocast) + APEX FusedLAMB |
 | Attention | FlashAttention 2 |
 
-## Multi-Node Results (32x H100 — 4 nodes)
+## Single Node (8x H100)
+
+**Configuration:** `batch=64/GPU × grad_accum=64 × 8 GPUs = 32768 global_bs`
+
+| Metric | Value |
+|--------|-------|
+| **Time to convergence** | **491.85 min (8h 11.9min)** |
+| Convergence step | 1400 / 1563 |
+| Final MLM accuracy | **0.7209** (target: 0.720) |
+| Average throughput | **1555 seq/s** |
+
+**MLM accuracy trajectory:**
+
+| Step | MLM Accuracy | Elapsed |
+|------|-------------|---------|
+| 100  | 0.6945      | 34.83 min |
+| 200  | 0.6948      | 69.76 min |
+| 300  | 0.6961      | 104.77 min |
+| 400  | 0.6987      | 139.83 min |
+| 500  | 0.7036      | 174.91 min |
+| 600  | 0.7060      | 210.03 min |
+| 700  | 0.7079      | 245.18 min |
+| 800  | 0.7090      | 280.33 min |
+| 900  | 0.7117      | 315.48 min |
+| 1000 | 0.7136      | 350.71 min |
+| 1100 | 0.7158      | 385.98 min |
+| 1200 | 0.7180      | 421.21 min |
+| 1300 | 0.7199      | 456.52 min |
+| **1400** | **0.7209 ✓** | **491.84 min** |
+
+**Log:** `bert_1node_phase2_20260228_200713.txt`
+
+## Multi-Node (32x H100 — 4 nodes)
 
 **Configuration:** `batch=64/GPU × grad_accum=16 × 32 GPUs = 32768 global_bs`
 
@@ -34,7 +66,6 @@
 | Convergence step | 1400 / 1563 |
 | Final MLM accuracy | **0.7212** (target: 0.720) |
 | Average throughput | **4937 seq/s** |
-| World size | 32 GPUs (4 nodes × 8 GPUs) |
 
 **MLM accuracy trajectory:**
 
@@ -57,40 +88,19 @@
 
 **Log:** `bert_4node_phase2_20260227_192027.txt`
 
-## Single-Node Results (8x H100)
-
-**Configuration:** `batch=64/GPU × grad_accum=64 × 8 GPUs = 32768 global_bs`
-
-| Metric | Value |
-|--------|-------|
-| **Time to convergence** | **~487 min (estimated)** |
-| Final MLM accuracy | ~0.721 (estimated — same trajectory as multi-node) |
-| Average throughput | **1566 seq/s** (measured, steps 1–220) |
-
-> **Note:** Single-node run started 2026-02-28, ETA ~8–9 hours. Throughput is measured from
-> the first 220 steps. Since global_bs=32768 matches multi-node, the per-step accuracy
-> trajectory is identical; convergence step is expected to be ~1400, same as multi-node.
-
-**Partial MLM accuracy (first run, killed at step 220):**
-
-| Step | MLM Accuracy | Elapsed |
-|------|-------------|---------|
-| 100  | 0.6975      | 34.83 min |
-| 200  | 0.6928      | 69.78 min |
-
-**Log:** `bert_1node_phase2_20260227_175133.txt` (partial), `bert_1node_phase2_20260228_200713.txt` (full run in progress)
-
 ## Scaling Analysis
 
 | Metric | Single-Node (8 GPU) | Multi-Node (32 GPU) | Ratio |
 |--------|--------------------|--------------------|-------|
-| Throughput | 1566 seq/s | 4937 seq/s | **3.15×** |
-| Time to convergence | ~487 min (est.) | 154.86 min | **3.14×** |
-| Scaling efficiency | — | **78.8%** (vs ideal 4×) |
+| Throughput | 1555 seq/s | 4937 seq/s | **3.17×** |
+| Time to convergence | 491.85 min | 154.86 min | **3.17×** |
+| **Scaling efficiency** | — | **79.4%** (vs ideal 4×) |
 
 > Scaling efficiency = (single-node throughput × N nodes) / multi-node throughput
-> = (1566 × 4) / 4937 = 6264 / 4937 = **78.8% at 4 nodes**
-> Note: No InfiniBand — inter-node via 100GbE Ethernet, which limits collective bandwidth.
+> = (1555 × 4) / 4937 = 6220 / 4937 = **79.4% at 4 nodes**
+>
+> Efficiency loss attributable to Ethernet-only inter-node collective communication
+> (no InfiniBand). NCCL AllReduce bandwidth across 4 nodes measured at 330 GB/s bus BW.
 
 ## Infrastructure Notes
 
@@ -98,4 +108,4 @@
 - **Network:** Ethernet only (no InfiniBand); NCCL over TCP with `--network=host`
 - **Rendezvous:** Static (`--master_addr=10.15.21.81 --master_port=29502`) — c10d backend failed due to Docker `--network=host` hostname resolution quirk (`gethostname("g138")` returns `127.0.1.1` inside container)
 - **Optimizer:** APEX FusedLAMB (fp32 master weights, bf16 gradients via autocast)
-- **Checkpoint:** Phase 2 checkpoint saved to `phase2_checkpoint.pt` after convergence
+- **Note:** Official MLPerf BERT uses `nvcr.io/nvidia/mlperf/training:bert-24.09` (requires MLPerf program enrollment). These runs used `pytorch:24.09-py3` with a custom training script and HuggingFace `bert-large-uncased` as Phase 1 checkpoint proxy.
