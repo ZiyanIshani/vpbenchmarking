@@ -89,7 +89,7 @@ Running on...
    60000000			2309.5
    64000000			2442.0
    68000000			2352.4
-
+   
 Result = PASS
 
 NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
