@@ -1,0 +1,117 @@
+
+=============
+== PyTorch ==
+=============
+
+NVIDIA Release 24.09 (build 109656992)
+PyTorch Version 2.5.0a0+b465a58
+Container image Copyright (c) 2024, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+Copyright (c) 2014-2024 Facebook Inc.
+Copyright (c) 2011-2014 Idiap Research Institute (Ronan Collobert)
+Copyright (c) 2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+Copyright (c) 2011-2012 NEC Laboratories America (Koray Kavukcuoglu)
+Copyright (c) 2011-2013 NYU                      (Clement Farabet)
+Copyright (c) 2006-2010 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston)
+Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
+Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+Copyright (c) 2015      Google Inc.
+Copyright (c) 2015      Yangqing Jia
+Copyright (c) 2013-2016 The Caffe contributors
+All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+2026-03-01 22:01:03,556 INFO ============================================================
+2026-03-01 22:01:03,556 INFO MLPerf Inference BERT-99
+2026-03-01 22:01:03,556 INFO   Scenario:    Offline
+2026-03-01 22:01:03,556 INFO   Precision:   fp16
+2026-03-01 22:01:03,556 INFO   Batch size:  512
+2026-03-01 22:01:03,689 INFO   GPUs:        8
+2026-03-01 22:01:03,689 INFO ============================================================
+2026-03-01 22:01:03,690 INFO Loading SQuAD from /data/dev-v1.1.json
+2026-03-01 22:01:05,656 INFO Dataset: 10570 examples → 10772 features
+2026-03-01 22:01:05,658 INFO Loading model from /data/model.pytorch ...
+/scripts/bert_inference.py:87: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(model_path, map_location="cpu")
+2026-03-01 22:01:06,467 INFO HTTP Request: HEAD https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-01 22:01:06,468 WARNING Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-01 22:01:06,516 INFO HTTP Request: GET https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:01:10,370 WARNING Unexpected keys (2): ['bert.pooler.dense.weight', 'bert.pooler.dense.bias']
+2026-03-01 22:01:10,728 INFO Model ready on 8 GPU(s) [fp16]
+2026-03-01 22:01:10,751 INFO Warming up GPU...
+2026-03-01 22:01:14,598 INFO Warmup done
+2026-03-01 22:01:14,598 INFO 
+============================================================
+Scenario: Offline
+============================================================
+2026-03-01 22:01:14,599 INFO Starting LoadGen [Offline] target_qps=2000.0 min_duration=60000ms min_queries=270336
+================================================
+MLPerf Results Summary
+================================================
+SUT name : PySUT
+Scenario : Offline
+Mode     : PerformanceOnly
+Samples per second: 3336.21
+Result is : VALID
+  Min duration satisfied : Yes
+  Min queries satisfied : Yes
+  Early stopping satisfied: Yes
+
+================================================
+Additional Stats
+================================================
+Min latency (ns)                : 202892480
+Max latency (ns)                : 81030958338
+Mean latency (ns)               : 40607807219
+50.00 percentile latency (ns)   : 40679955465
+90.00 percentile latency (ns)   : 73044718619
+95.00 percentile latency (ns)   : 77082789478
+97.00 percentile latency (ns)   : 78735521873
+99.00 percentile latency (ns)   : 80231171538
+99.90 percentile latency (ns)   : 81030958338
+
+================================================
+Test Parameters Used
+================================================
+samples_per_query : 270336
+target_qps : 1
+target_latency (ns): 0
+max_async_queries : 1
+min_duration (ms): 60000
+max_duration (ms): 0
+min_query_count : 1
+max_query_count : 0
+qsl_rng_seed : 0
+sample_index_rng_seed : 0
+schedule_rng_seed : 0
+accuracy_log_rng_seed : 0
+accuracy_log_probability : 0
+accuracy_log_sampling_target : 0
+print_timestamps : 0
+performance_issue_unique : 0
+performance_issue_same : 0
+performance_issue_same_index : 0
+performance_sample_count : 10772
+accuracy_sample_count : 10772
+
+No warnings encountered during test.
+
+No errors encountered during test.
+2026-03-01 22:02:35,682 INFO Offline result: {'qps': 3336.21, 'valid': True, 'min_latency_ms': 202.89248, 'max_latency_ms': 81030.958338, 'p50_latency_ms': 40679.955465, 'p99_latency_ms': 80231.171538}
+2026-03-01 22:02:35,683 INFO Results written to /results/results.json
+
+============================================================
+MLPerf Inference BERT-99 — Summary
+============================================================
+
+Offline Scenario:
+  Queries/sec (QPS):    3336.2
+  P99 latency:          80231.2 ms  ✗ (target ≤ 130.0 ms)
+  P50 latency:          40680.0 ms
+  Result:               VALID ✓
+

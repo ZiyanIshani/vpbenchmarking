@@ -1,0 +1,10 @@
+{
+  "Server": {
+    "completed_qps": 499.29,
+    "valid": true,
+    "min_latency_ms": 70.283619,
+    "max_latency_ms": 816.783629,
+    "p50_latency_ms": 132.038421,
+    "p99_latency_ms": 207.284605
+  }
+}

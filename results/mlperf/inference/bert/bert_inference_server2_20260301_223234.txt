@@ -1,0 +1,137 @@
+
+=============
+== PyTorch ==
+=============
+
+NVIDIA Release 24.09 (build 109656992)
+PyTorch Version 2.5.0a0+b465a58
+Container image Copyright (c) 2024, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+Copyright (c) 2014-2024 Facebook Inc.
+Copyright (c) 2011-2014 Idiap Research Institute (Ronan Collobert)
+Copyright (c) 2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+Copyright (c) 2011-2012 NEC Laboratories America (Koray Kavukcuoglu)
+Copyright (c) 2011-2013 NYU                      (Clement Farabet)
+Copyright (c) 2006-2010 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston)
+Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
+Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+Copyright (c) 2015      Google Inc.
+Copyright (c) 2015      Yangqing Jia
+Copyright (c) 2013-2016 The Caffe contributors
+All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+2026-03-01 22:32:57,334 INFO ============================================================
+2026-03-01 22:32:57,334 INFO MLPerf Inference BERT-99
+2026-03-01 22:32:57,334 INFO   Scenario:    Server
+2026-03-01 22:32:57,334 INFO   Precision:   fp16
+2026-03-01 22:32:57,334 INFO   GPUs:        8
+2026-03-01 22:32:57,334 INFO   Offline bs:  512
+2026-03-01 22:32:57,334 INFO   Server bs/GPU: 8
+2026-03-01 22:32:57,334 INFO ============================================================
+2026-03-01 22:32:57,335 INFO Loading SQuAD from /data/dev-v1.1.json
+2026-03-01 22:32:59,282 INFO Dataset: 10570 examples → 10772 features
+2026-03-01 22:32:59,286 INFO 
+============================================================
+Server Scenario
+============================================================
+2026-03-01 22:32:59,286 INFO Loading model on 8 GPU(s) for Server ...
+2026-03-01 22:33:00,060 INFO HTTP Request: HEAD https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:33:00,111 INFO HTTP Request: GET https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:33:04,356 INFO   GPU 0: ready
+2026-03-01 22:33:04,402 INFO HTTP Request: HEAD https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:33:09,065 INFO   GPU 1: ready
+2026-03-01 22:33:09,112 INFO HTTP Request: HEAD https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:33:13,626 INFO   GPU 2: ready
+2026-03-01 22:33:13,675 INFO HTTP Request: HEAD https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:33:17,872 INFO   GPU 3: ready
+2026-03-01 22:33:17,919 INFO HTTP Request: HEAD https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:33:22,097 INFO   GPU 4: ready
+2026-03-01 22:33:22,146 INFO HTTP Request: HEAD https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:33:26,426 INFO   GPU 5: ready
+2026-03-01 22:33:26,473 INFO HTTP Request: HEAD https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:33:30,633 INFO   GPU 6: ready
+2026-03-01 22:33:30,688 INFO HTTP Request: HEAD https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:33:34,952 INFO   GPU 7: ready
+2026-03-01 22:33:34,976 INFO Warming up (Server, all GPUs)...
+2026-03-01 22:33:35,626 INFO Warmup done
+2026-03-01 22:33:35,627 INFO Starting Server — target_qps=3000.0 min_duration=60000ms min_queries=270336
+================================================
+MLPerf Results Summary
+================================================
+SUT name : PySUT
+Scenario : Server
+Mode     : PerformanceOnly
+Completed samples per second    : 792.21
+Result is : INVALID
+  Performance constraints satisfied : NO
+  Min duration satisfied : Yes
+  Min queries satisfied : Yes
+  Early stopping satisfied: NO
+Recommendations:
+ * Reduce target QPS to improve latency.
+Early Stopping Result:
+ * Run unsuccessful.
+ * Processed 270336 queries.
+ * Would need to run at least 26883058 more queries,
+ with the run being successful if every additional
+ query were under latency.
+
+================================================
+Additional Stats
+================================================
+Scheduled samples per second : 3007.34
+Min latency (ns)                : 112190016
+Max latency (ns)                : 251967052048
+Mean latency (ns)               : 126927752834
+50.00 percentile latency (ns)   : 127243024237
+90.00 percentile latency (ns)   : 226828978979
+95.00 percentile latency (ns)   : 239278781964
+97.00 percentile latency (ns)   : 244272238729
+99.00 percentile latency (ns)   : 249273369435
+99.90 percentile latency (ns)   : 251590790993
+
+================================================
+Test Parameters Used
+================================================
+samples_per_query : 1
+target_qps : 3000
+target_latency (ns): 130000000
+max_async_queries : 0
+min_duration (ms): 60000
+max_duration (ms): 0
+min_query_count : 270336
+max_query_count : 0
+qsl_rng_seed : 0
+sample_index_rng_seed : 0
+schedule_rng_seed : 0
+accuracy_log_rng_seed : 0
+accuracy_log_probability : 0
+accuracy_log_sampling_target : 0
+print_timestamps : 0
+performance_issue_unique : 0
+performance_issue_same : 0
+performance_issue_same_index : 0
+performance_sample_count : 10772
+accuracy_sample_count : 10772
+
+No warnings encountered during test.
+
+No errors encountered during test.
+2026-03-01 22:39:17,531 INFO Server result: {'completed_qps': 792.21, 'valid': True, 'min_latency_ms': 112.190016, 'max_latency_ms': 251967.052048, 'p50_latency_ms': 127243.024237, 'p99_latency_ms': 249273.369435}
+
+============================================================
+MLPerf Inference BERT-99 — Summary
+============================================================
+
+Server Scenario:
+  QPS:              792.2
+  P99 latency:      249273.4 ms  ✗ (target ≤ 130 ms)
+  P50 latency:      127243.0 ms
+  Min latency:      112.2 ms
+  Result:           VALID ✓
+

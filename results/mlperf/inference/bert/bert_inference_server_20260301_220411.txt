@@ -1,0 +1,125 @@
+
+=============
+== PyTorch ==
+=============
+
+NVIDIA Release 24.09 (build 109656992)
+PyTorch Version 2.5.0a0+b465a58
+Container image Copyright (c) 2024, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+Copyright (c) 2014-2024 Facebook Inc.
+Copyright (c) 2011-2014 Idiap Research Institute (Ronan Collobert)
+Copyright (c) 2012-2014 Deepmind Technologies    (Koray Kavukcuoglu)
+Copyright (c) 2011-2012 NEC Laboratories America (Koray Kavukcuoglu)
+Copyright (c) 2011-2013 NYU                      (Clement Farabet)
+Copyright (c) 2006-2010 NEC Laboratories America (Ronan Collobert, Leon Bottou, Iain Melvin, Jason Weston)
+Copyright (c) 2006      Idiap Research Institute (Samy Bengio)
+Copyright (c) 2001-2004 Idiap Research Institute (Ronan Collobert, Samy Bengio, Johnny Mariethoz)
+Copyright (c) 2015      Google Inc.
+Copyright (c) 2015      Yangqing Jia
+Copyright (c) 2013-2016 The Caffe contributors
+All rights reserved.
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+2026-03-01 22:04:34,798 INFO ============================================================
+2026-03-01 22:04:34,798 INFO MLPerf Inference BERT-99
+2026-03-01 22:04:34,798 INFO   Scenario:    Server
+2026-03-01 22:04:34,798 INFO   Precision:   fp16
+2026-03-01 22:04:34,798 INFO   Batch size:  32
+2026-03-01 22:04:34,930 INFO   GPUs:        8
+2026-03-01 22:04:34,930 INFO ============================================================
+2026-03-01 22:04:34,931 INFO Loading SQuAD from /data/dev-v1.1.json
+2026-03-01 22:04:36,891 INFO Dataset: 10570 examples → 10772 features
+2026-03-01 22:04:36,893 INFO Loading model from /data/model.pytorch ...
+/scripts/bert_inference.py:87: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(model_path, map_location="cpu")
+2026-03-01 22:04:37,659 INFO HTTP Request: HEAD https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:04:37,709 INFO HTTP Request: GET https://huggingface.co/bert-large-uncased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-01 22:04:41,579 WARNING Unexpected keys (2): ['bert.pooler.dense.weight', 'bert.pooler.dense.bias']
+2026-03-01 22:04:41,949 INFO Model ready on 8 GPU(s) [fp16]
+2026-03-01 22:04:41,971 INFO Warming up GPU...
+2026-03-01 22:04:45,805 INFO Warmup done
+2026-03-01 22:04:45,805 INFO 
+============================================================
+Scenario: Server
+============================================================
+2026-03-01 22:04:45,806 INFO Starting LoadGen [Server] target_qps=1500.0 min_duration=60000ms min_queries=270336
+================================================
+MLPerf Results Summary
+================================================
+SUT name : PySUT
+Scenario : Server
+Mode     : PerformanceOnly
+Completed samples per second    : 215.35
+Result is : INVALID
+  Performance constraints satisfied : NO
+  Min duration satisfied : Yes
+  Min queries satisfied : Yes
+  Early stopping satisfied: NO
+Recommendations:
+ * Reduce target QPS to improve latency.
+Early Stopping Result:
+ * Run unsuccessful.
+ * Processed 270336 queries.
+ * Would need to run at least 26883760 more queries,
+ with the run being successful if every additional
+ query were under latency.
+
+================================================
+Additional Stats
+================================================
+Scheduled samples per second : 1503.67
+Min latency (ns)                : 87995677
+Max latency (ns)                : 1075558628773
+Mean latency (ns)               : 539462384586
+50.00 percentile latency (ns)   : 540184232899
+90.00 percentile latency (ns)   : 968806184094
+95.00 percentile latency (ns)   : 1022154547476
+97.00 percentile latency (ns)   : 1043478837444
+99.00 percentile latency (ns)   : 1064911433151
+99.90 percentile latency (ns)   : 1074548990500
+
+================================================
+Test Parameters Used
+================================================
+samples_per_query : 1
+target_qps : 1500
+target_latency (ns): 130000000
+max_async_queries : 0
+min_duration (ms): 60000
+max_duration (ms): 0
+min_query_count : 270336
+max_query_count : 0
+qsl_rng_seed : 0
+sample_index_rng_seed : 0
+schedule_rng_seed : 0
+accuracy_log_rng_seed : 0
+accuracy_log_probability : 0
+accuracy_log_sampling_target : 0
+print_timestamps : 0
+performance_issue_unique : 0
+performance_issue_same : 0
+performance_issue_same_index : 0
+performance_sample_count : 10772
+accuracy_sample_count : 10772
+
+No warnings encountered during test.
+
+No errors encountered during test.
+2026-03-01 22:25:41,350 INFO Server result: {'completed_qps': 215.35, 'valid': True, 'min_latency_ms': 87.995677, 'max_latency_ms': 1075558.628773, 'p50_latency_ms': 540184.232899, 'p99_latency_ms': 1064911.433151}
+2026-03-01 22:25:41,350 INFO Results written to /results/results.json
+
+============================================================
+MLPerf Inference BERT-99 — Summary
+============================================================
+
+Server Scenario:
+  Queries/sec (QPS):    215.3
+  P99 latency:          1064911.4 ms  ✗ (target ≤ 130.0 ms)
+  P50 latency:          540184.2 ms
+  Result:               VALID ✓
+
