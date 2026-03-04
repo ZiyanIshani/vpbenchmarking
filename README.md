@@ -162,11 +162,11 @@ vpbenchmarking/
 
 ## Key Takeaways
 
-**Tensor core utilization is strong.** HPL-MxP FP8 LU peak of 3,554 TFLOPS is 89.8% of H100 theoretical FP8 peak — the cluster is not compute-bottlenecked.
+**Tensor core utilization is strong.** HPL-MxP FP8 LU peak of 3,554 TFLOPS is 89.8% of H100 theoretical FP8 peak. The cluster is not compute-bottlenecked.
 
 **Memory bandwidth is healthy across all levels.** HBM3 at 86.7% efficiency, PCIe H2D at 87%, CPU DDR5 at 79.3%.
 
-**Multi-node training scales well on Ethernet.** 79.4% scaling efficiency across 4 nodes without InfiniBand is strong. The 3.17× speedup on BERT training (vs ideal 4×) is attributable to NCCL AllReduce overhead, not hardware limitations.
+**Multi-node training scales well on Ethernet.** 79.4% scaling efficiency across 4 nodes without InfiniBand. The 3.17× speedup on BERT training is attributable to NCCL AllReduce overhead, not hardware limitations.
 
 **Inference throughput is production-grade.** 3,336 QPS Offline on 8× H100 for BERT-Large FP16. Scaled linearly across 4 nodes: ~13,344 QPS cluster-wide.
 
