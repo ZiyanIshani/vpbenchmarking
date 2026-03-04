@@ -1,6 +1,6 @@
 # Voltage Park GPU Infrastructure Benchmarking
 
-Comprehensive benchmark suite characterizing a 4-node, 32× NVIDIA H100 80GB HBM3 cluster operated by [Voltage Park](https://voltagepark.com). Conducted in partnership with [AI @ Georgia Tech](https://ai.gt.edu). Results inform customer-facing performance claims and platform marketing for reserved and on-demand GPU infrastructure.
+Comprehensive benchmark suite characterizing a 4-node, 32× NVIDIA H100 80GB HBM3 cluster operated by Voltage Park. Conducted in partnership with AI @ Georgia Tech. Results inform customer-facing performance claims and platform marketing for on-demand GPU infrastructure.
 
 ---
 
