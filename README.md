@@ -172,4 +172,4 @@ vpbenchmarking/
 
 ---
 
-*Benchmarking conducted March 2026 in partnership with [Voltage Park](https://voltagepark.com) by [AI @ Georgia Tech](https://ai.gt.edu).*
+*Benchmarking conducted March 2026 in partnership with Voltage Park by AI @ Georgia Tech.*
